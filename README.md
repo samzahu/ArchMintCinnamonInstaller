@@ -17,10 +17,6 @@
   🌿 Enjoy the full <b>Mint Cinnamon desktop experience</b> on Arch.
 </p>
 
-## Introduction
-
-It installs **Mint themes on Arch**, configures **Cinnamon extensions**, sets **Nemo defaults**, and applies **Mint keybindings** — giving you the full **Mint Cinnamon desktop experience** on Arch.
-
 ---
 
 ## ✨ Features
