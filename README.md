@@ -9,7 +9,12 @@
 </p>
 
 <p align="center">
-  Transform your Arch Linux into a <b>Linux Mint Cinnamon look‑alike</b> with one script.<br>
+  🖥️ Transform your Arch Linux into a <b>Linux Mint Cinnamon look‑alike</b> with one script.<br><br>
+  🎨 Installs <b>Mint themes on Arch</b><br>
+  ⚙️ Configures <b>Cinnamon extensions</b><br>
+  📁 Sets <b>Nemo defaults</b><br>
+  ⌨️ Applies <b>Mint keybindings</b><br><br>
+  🌿 Enjoy the full <b>Mint Cinnamon desktop experience</b> on Arch.
 </p>
 
 ## Introduction
