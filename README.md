@@ -35,7 +35,7 @@ It installs **Mint themes on Arch**, configures **Cinnamon extensions**, sets **
 Clone the repo and run the installer:
 
 ```bash
-git clone https://github.com/USERNAME/ArchMintCinnamonInstaller.git
+git clone https://github.com/samzahu/ArchMintCinnamonInstaller.git
 cd ArchMintCinnamonInstaller
 chmod +x install.sh
 ./install.sh
