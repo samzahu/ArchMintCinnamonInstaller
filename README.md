@@ -1,4 +1,4 @@
-<h1 align="center">Arch → Linux Mint Cinnamon Replica Installer</h1>
+<h1 align="center">🌿 Arch → Linux Mint Cinnamon Replica Installer 🖥️</h1>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Arch_Linux-blue?logo=arch-linux&logoColor=white" alt="Arch Linux">
@@ -8,24 +8,29 @@
   <img src="https://img.shields.io/badge/Uses-AUR-orange?logo=arch-linux&logoColor=white" alt="AUR Packages">
 </p>
 
+---
+
 <p align="center">
   🖥️ Transform your Arch Linux into a <b>Linux Mint Cinnamon look‑alike</b> with one script.<br><br>
-  🎨 Installs <b>Mint themes on Arch</b><br>
+  🎨 Installs <b>Mint themes & icons</b><br>
   ⚙️ Configures <b>Cinnamon extensions</b><br>
   📁 Sets <b>Nemo defaults</b><br>
   ⌨️ Applies <b>Mint keybindings</b><br><br>
   🌿 Enjoy the full <b>Mint Cinnamon desktop experience</b> on Arch.
 </p>
 
+---
+
 ## ✨ Features
-- **Mint themes & icons**: Mint‑Y, Mint‑X, wallpapers
-- **Cinnamon desktop** with Mint panel layout
-- **LightDM Slick Greeter** for login
-- **Mint default apps**: Xed, Pix, Xplayer, Hypnotix, Mintstick, Mintupdate
-- **Fonts**: Mint’s default font set
-- **Cinnamon extensions**: Mint Menu, Weather, CPU Monitor
-- **Nemo defaults**: single‑click, icon view, hidden files visible, toolbar enabled
-- **Keybindings**: Super + arrows, Alt+F4, workspace shortcuts
+
+- 🎨 **Mint themes & icons**: Mint‑Y, Mint‑X, wallpapers  
+- 🖥️ **Cinnamon desktop** with Mint panel layout  
+- 🔑 **LightDM Slick Greeter** for login  
+- 📦 **Mint default apps**: Xed, Pix, Xplayer, Hypnotix, Mintstick, Mintupdate  
+- 🔤 **Fonts**: Mint’s default font set  
+- ⚙️ **Cinnamon extensions**: Mint Menu, Weather, CPU Monitor  
+- 📁 **Nemo defaults**: single‑click, icon view, hidden files visible, toolbar enabled  
+- ⌨️ **Keybindings**: Super + arrows, Alt+F4, workspace shortcuts  
 
 ---
 
