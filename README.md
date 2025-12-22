@@ -128,3 +128,9 @@ After running the installer, your Arch system will be transformed into a **Mint 
   ```bash
   journalctl -xe
   ```
+---
+
+## 🤝 Contributing Contributions are welcome!
+- Fork the repo
+- Create a feature branch
+- Submit a pull request
