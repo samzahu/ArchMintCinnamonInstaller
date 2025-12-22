@@ -17,8 +17,6 @@
   🌿 Enjoy the full <b>Mint Cinnamon desktop experience</b> on Arch.
 </p>
 
----
-
 ## ✨ Features
 - **Mint themes & icons**: Mint‑Y, Mint‑X, wallpapers
 - **Cinnamon desktop** with Mint panel layout
