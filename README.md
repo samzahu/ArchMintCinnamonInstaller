@@ -1,4 +1,4 @@
-b<h1 align="center">🌿 Arch → Linux Mint Cinnamon Replica Installer 🖥️</h1>
+<h1 align="center">🌿 Arch → Linux Mint Cinnamon Replica Installer 🖥️</h1>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Arch_Linux-blue?logo=arch-linux&logoColor=white" alt="Arch Linux">
