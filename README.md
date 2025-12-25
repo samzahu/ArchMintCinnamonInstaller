@@ -1,4 +1,4 @@
-<h1 align="center">🌿 Arch → Linux Mint Cinnamon Replica Installer 🖥️</h1>
+b<h1 align="center">🌿 Arch → Linux Mint Cinnamon Replica Installer 🖥️</h1>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Arch_Linux-blue?logo=arch-linux&logoColor=white" alt="Arch Linux">
@@ -135,3 +135,4 @@ Contributions are welcome!
 - Fork the repo
 - Create a feature branch
 - Submit a pull request
+Please open an issue before any contribution
