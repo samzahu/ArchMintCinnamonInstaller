@@ -4,13 +4,9 @@
 
 set -e
 
-echo "==> Installing reflector..."
-sudo pacman -S --noconfirm reflector
-
-echo "==> Optimizing mirrors with reflector..."
-# Fetch the 30 most recently updated HTTPS mirrors worldwide,
-# sort them by download rate, and save to pacman mirrorlist
-sudo reflector --latest 30 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+echo "==> Setting fastest mirror"
+sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+rankmirrors /etc/pacman.d/mirrorlist.bak > /etc/pacman.d/mirrorlist
 
 echo "==> Refreshing package databases..."
 sudo pacman -Syy
