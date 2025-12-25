@@ -4,11 +4,22 @@
 
 set -e
 
+echo "==> Installing reflector..."
+sudo pacman -S --noconfirm reflector
+
+echo "==> Optimizing mirrors with reflector..."
+# Fetch the 30 most recently updated HTTPS mirrors worldwide,
+# sort them by download rate, and save to pacman mirrorlist
+sudo reflector --latest 30 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+
+echo "==> Refreshing package databases..."
+sudo pacman -Syy
+
 echo "==> Updating system..."
 sudo pacman -Syu --noconfirm
 
-echo "==> Installing Cinnamon desktop..."
-sudo pacman -S --noconfirm cinnamon cinnamon-translations nemo gnome-terminal
+echo "==> Installing Xorg + Cinnamon desktop..."
+sudo pacman -S --noconfirm xorg xorg-xinit cinnamon cinnamon-session nemo gnome-terminal
 
 echo "==> Installing LightDM + Slick Greeter..."
 sudo pacman -S --noconfirm lightdm lightdm-slick-greeter
@@ -18,6 +29,7 @@ echo "==> Configuring LightDM Slick Greeter..."
 sudo bash -c 'cat > /etc/lightdm/lightdm.conf <<EOF
 [Seat:*]
 greeter-session=lightdm-slick-greeter
+user-session=cinnamon
 EOF'
 
 echo "==> Installing yay (AUR helper)..."
