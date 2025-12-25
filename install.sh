@@ -1,6 +1,5 @@
 #!/bin/bash
-# Arch → Linux Mint Cinnamon Replica Installer
-# Extended version with fonts, Cinnamon extensions, panel layout, keybindings, and Nemo defaults
+# Arch → Linux Mint Cinnamon Replica Installer (Includes fonts, Cinnamon extensions, panel layout, keybindings, Nemo defaults)
 
 set -e
 
@@ -28,6 +27,9 @@ if ! command -v yay &> /dev/null; then
   cd /tmp/yay && makepkg -si --noconfirm
 fi
 
+echo "==> Optimizing makepkg for parallel builds..."
+sudo sed -i "s/^#MAKEFLAGS=.*/MAKEFLAGS=\"-j$(nproc)\"/" /etc/makepkg.conf
+
 echo "==> Installing Mint themes, icons, and wallpapers..."
 yay -S --needed --noconfirm mint-themes mint-y-icons mint-x-icons mint-backgrounds
 
@@ -41,8 +43,7 @@ echo "==> Installing Cinnamon extensions (Mint Menu, etc.)..."
 yay -S --needed --noconfirm cinnamon-spices-applets-mint-menu cinnamon-spices-applets-weather cinnamon-spices-applets-cpu-monitor
 
 echo "==> Installing Snap..."
-git clone https://aur.archlinux.org/snapd.git /tmp/snapd
-cd /tmp/snapd && makepkg -si --noconfirm
+yay -S --needed --noconfirm snapd
 
 echo "==> Installing Flatpak..."
 sudo pacman -S --noconfirm flatpak
@@ -101,6 +102,21 @@ EOF'
 
 sudo dconf update
 
-echo "==> Installation complete!"
-echo "Reboot your system to enjoy Arch with a Mint Cinnamon look and feel."
+echo "==> Cleaning up temporary files and caches..."
+rm -rf /tmp/yay
+yay -Scc --noconfirm || true
+sudo pacman -Sc --noconfirm || true
 
+echo "==> Installation complete!"
+
+# Prompt user for reboot
+read -p "Do you want to reboot now? (y/N): " answer
+case "$answer" in
+  [yY]|[yY][eE][sS])
+    echo "Rebooting..."
+    sudo reboot
+    ;;
+  *)
+    echo "You can reboot later to enjoy Arch with a Mint Cinnamon look and feel."
+    ;;
+esac
