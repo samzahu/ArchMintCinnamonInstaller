@@ -4,10 +4,6 @@
 
 set -e
 
-echo "==> Setting fastest mirror"
-sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
-rankmirrors /etc/pacman.d/mirrorlist.bak > /etc/pacman.d/mirrorlist
-
 echo "==> Refreshing package databases..."
 sudo pacman -Syy
 
@@ -35,16 +31,6 @@ if ! command -v yay &> /dev/null; then
   cd /tmp/yay && makepkg -si --noconfirm
 fi
 
-echo "==> Installing Pamac-Full (GUI App Store with Flatpak + Snap support)..."
-yay -S --noconfirm pamac-full
-
-echo "==> Enabling Snap service..."
-sudo systemctl enable --now snapd.socket
-sudo ln -s /var/lib/snapd/snap /snap || true
-
-echo "==> Adding Flathub remote for Flatpak..."
-sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-
 echo "==> Installing Mint themes, icons, and wallpapers..."
 yay -S --noconfirm mint-themes mint-y-icons mint-x-icons mint-backgrounds
 
@@ -56,6 +42,16 @@ yay -S --noconfirm fonts-linuxmint
 
 echo "==> Installing Cinnamon extensions (Mint Menu, etc.)..."
 yay -S --noconfirm cinnamon-spices-applets-mint-menu cinnamon-spices-applets-weather cinnamon-spices-applets-cpu-monitor
+
+echo "==> Installing Pamac-Full (GUI App Store with Flatpak + Snap support)..."
+yay -S --noconfirm pamac-full snap flatpak
+
+echo "==> Enabling Snap service..."
+sudo systemctl enable --now snapd.socket
+sudo ln -s /var/lib/snapd/snap /snap || true
+
+echo "==> Adding Flathub remote for Flatpak..."
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 echo "==> Applying Cinnamon defaults..."
 gsettings set org.cinnamon.desktop.interface gtk-theme "Mint-Y"
