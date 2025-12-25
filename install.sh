@@ -40,13 +40,12 @@ yay -S --needed --noconfirm fonts-linuxmint
 echo "==> Installing Cinnamon extensions (Mint Menu, etc.)..."
 yay -S --needed --noconfirm cinnamon-spices-applets-mint-menu cinnamon-spices-applets-weather cinnamon-spices-applets-cpu-monitor
 
-echo "==> Installing Snap"
-git clone https://aur.archlinux.org/snapd.git
-cd snapd
-makepkg -si
+echo "==> Installing Snap..."
+git clone https://aur.archlinux.org/snapd.git /tmp/snapd
+cd /tmp/snapd && makepkg -si --noconfirm
 
-echo "==> Installing Snap"
-sudo pacman -S --needed --noconfirm flatpak
+echo "==> Installing Flatpak..."
+sudo pacman -S --noconfirm flatpak
 
 echo "==> Installing Pamac-Full (GUI App Store with Flatpak + Snap support)..."
 yay -S --needed --noconfirm pamac-full
