@@ -43,8 +43,16 @@ yay -S --noconfirm fonts-linuxmint
 echo "==> Installing Cinnamon extensions (Mint Menu, etc.)..."
 yay -S --noconfirm cinnamon-spices-applets-mint-menu cinnamon-spices-applets-weather cinnamon-spices-applets-cpu-monitor
 
+echo "==> Installing Snap"
+git clone https://aur.archlinux.org/snapd.git
+cd snapd
+makepkg -si
+
+echo "==> Installing Snap"
+sudo pacman -S --noconfirm flatpak
+
 echo "==> Installing Pamac-Full (GUI App Store with Flatpak + Snap support)..."
-yay -S --noconfirm pamac-full snap flatpak
+yay -S --noconfirm pamac-full
 
 echo "==> Enabling Snap service..."
 sudo systemctl enable --now snapd.socket
@@ -53,40 +61,49 @@ sudo ln -s /var/lib/snapd/snap /snap || true
 echo "==> Adding Flathub remote for Flatpak..."
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-echo "==> Applying Cinnamon defaults..."
-gsettings set org.cinnamon.desktop.interface gtk-theme "Mint-Y"
-gsettings set org.cinnamon.desktop.interface icon-theme "Mint-Y"
-gsettings set org.cinnamon.desktop.background picture-uri "file:///usr/share/backgrounds/linuxmint/default.jpg"
+echo "==> Creating default .xinitrc for Cinnamon..."
+cat > ~/.xinitrc <<EOF
+exec cinnamon-session
+EOF
 
-echo "==> Configuring Mint panel layout..."
-gsettings reset-recursively org.cinnamon
-gsettings set org.cinnamon panels-enabled "['1:bottom']"
-gsettings set org.cinnamon panel-zone-icon-size '["1:0:24","1:1:24","1:2:24"]'
-gsettings set org.cinnamon enabled-applets "['panel1:left:0:menu@cinnamon.org','panel1:left:1:show-desktop@cinnamon.org','panel1:center:0:window-list@cinnamon.org','panel1:right:0:systray@cinnamon.org','panel1:right:1:notifications@cinnamon.org','panel1:right:2:removable-drives@cinnamon.org','panel1:right:3:network@cinnamon.org','panel1:right:4:sound@cinnamon.org','panel1:right:5:power@cinnamon.org','panel1:right:6:calendar@cinnamon.org']"
+echo "==> Pre-seeding dconf with Mint Cinnamon defaults..."
+mkdir -p /etc/dconf/db/local.d
 
-echo "==> Configuring Mint keybindings..."
-gsettings set org.cinnamon.desktop.keybindings.wm close "['<Alt>F4']"
-gsettings set org.cinnamon.desktop.keybindings.wm minimize "['<Super>h']"
-gsettings set org.cinnamon.desktop.keybindings.wm toggle-maximized "['<Super>Up']"
-gsettings set org.cinnamon.desktop.keybindings.wm unmaximize "['<Super>Down']"
-gsettings set org.cinnamon.desktop.keybindings.wm switch-to-workspace-left "['<Control><Alt>Left']"
-gsettings set org.cinnamon.desktop.keybindings.wm switch-to-workspace-right "['<Control><Alt>Right']"
-gsettings set org.cinnamon.desktop.keybindings.wm switch-to-workspace-up "['<Control><Alt>Up']"
-gsettings set org.cinnamon.desktop.keybindings.wm switch-to-workspace-down "['<Control><Alt>Down']"
+sudo bash -c 'cat > /etc/dconf/db/local.d/00-mint-settings <<EOF
+[org/cinnamon/desktop/interface]
+gtk-theme="Mint-Y"
+icon-theme="Mint-Y"
 
-echo "==> Configuring Nemo defaults..."
-# Single-click to open files
-gsettings set org.nemo.preferences click-policy 'single'
-# Default view: icon view
-gsettings set org.nemo.preferences default-folder-viewer 'icon-view'
-# Show location bar instead of path bar
-gsettings set org.nemo.preferences show-location-entry true
-# Show hidden files by default
-gsettings set org.nemo.preferences show-hidden-files true
-# Show toolbar with common actions
-gsettings set org.nemo.preferences show-toolbar true
-# Use Mint’s default zoom level
-gsettings set org.nemo.icon-view default-zoom-level 'small'
+[org/cinnamon/desktop/background]
+picture-uri="file:///usr/share/backgrounds/linuxmint/default.jpg"
+
+[org/cinnamon]
+panels-enabled=["1:bottom"]
+panel-zone-icon-size=["1:0:24","1:1:24","1:2:24"]
+enabled-applets=["panel1:left:0:menu@cinnamon.org","panel1:left:1:show-desktop@cinnamon.org","panel1:center:0:window-list@cinnamon.org","panel1:right:0:systray@cinnamon.org","panel1:right:1:notifications@cinnamon.org","panel1:right:2:removable-drives@cinnamon.org","panel1:right:3:network@cinnamon.org","panel1:right:4:sound@cinnamon.org","panel1:right:5:power@cinnamon.org","panel1:right:6:calendar@cinnamon.org"]
+
+[org/cinnamon/desktop/keybindings/wm]
+close=["<Alt>F4"]
+minimize=["<Super>h"]
+toggle-maximized=["<Super>Up"]
+unmaximize=["<Super>Down"]
+switch-to-workspace-left=["<Control><Alt>Left"]
+switch-to-workspace-right=["<Control><Alt>Right"]
+switch-to-workspace-up=["<Control><Alt>Up"]
+switch-to-workspace-down=["<Control><Alt>Down"]
+
+[org/nemo/preferences]
+click-policy="single"
+default-folder-viewer="icon-view"
+show-location-entry=true
+show-hidden-files=true
+show-toolbar=true
+
+[org/nemo/icon-view]
+default-zoom-level="small"
+EOF'
+
+sudo dconf update
 
 echo "==> Installation complete!"
 echo "Reboot your system to enjoy Arch with a Mint Cinnamon look and feel."
