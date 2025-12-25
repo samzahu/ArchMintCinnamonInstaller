@@ -4,17 +4,14 @@
 
 set -e
 
-echo "==> Refreshing package databases..."
-sudo pacman -Syy
-
 echo "==> Updating system..."
-sudo pacman -Syu --noconfirm
+sudo pacman -Syu --needed --noconfirm
 
 echo "==> Installing Xorg + Cinnamon desktop..."
-sudo pacman -S --noconfirm xorg xorg-xinit cinnamon cinnamon-session nemo gnome-terminal
+sudo pacman -S --needed --noconfirm xorg xorg-xinit cinnamon cinnamon-session nemo gnome-terminal
 
 echo "==> Installing LightDM + Slick Greeter..."
-sudo pacman -S --noconfirm lightdm lightdm-slick-greeter
+sudo pacman -S --needed --noconfirm lightdm lightdm-slick-greeter
 sudo systemctl enable lightdm.service --force
 
 echo "==> Configuring LightDM Slick Greeter..."
@@ -25,23 +22,23 @@ user-session=cinnamon
 EOF'
 
 echo "==> Installing yay (AUR helper)..."
-sudo pacman -S --noconfirm git base-devel
+sudo pacman -S --needed --noconfirm git base-devel
 if ! command -v yay &> /dev/null; then
   git clone https://aur.archlinux.org/yay.git /tmp/yay
   cd /tmp/yay && makepkg -si --noconfirm
 fi
 
 echo "==> Installing Mint themes, icons, and wallpapers..."
-yay -S --noconfirm mint-themes mint-y-icons mint-x-icons mint-backgrounds
+yay -S --needed --noconfirm mint-themes mint-y-icons mint-x-icons mint-backgrounds
 
 echo "==> Installing Mint default applications..."
-yay -S --noconfirm xed pix xplayer hypnotix mintstick mintupdate
+yay -S --needed --noconfirm xed pix xplayer hypnotix mintstick mintupdate
 
 echo "==> Installing Mint fonts..."
-yay -S --noconfirm fonts-linuxmint
+yay -S --needed --noconfirm fonts-linuxmint
 
 echo "==> Installing Cinnamon extensions (Mint Menu, etc.)..."
-yay -S --noconfirm cinnamon-spices-applets-mint-menu cinnamon-spices-applets-weather cinnamon-spices-applets-cpu-monitor
+yay -S --needed --noconfirm cinnamon-spices-applets-mint-menu cinnamon-spices-applets-weather cinnamon-spices-applets-cpu-monitor
 
 echo "==> Installing Snap"
 git clone https://aur.archlinux.org/snapd.git
@@ -49,10 +46,10 @@ cd snapd
 makepkg -si
 
 echo "==> Installing Snap"
-sudo pacman -S --noconfirm flatpak
+sudo pacman -S --needed --noconfirm flatpak
 
 echo "==> Installing Pamac-Full (GUI App Store with Flatpak + Snap support)..."
-yay -S --noconfirm pamac-full
+yay -S --needed --noconfirm pamac-full
 
 echo "==> Enabling Snap service..."
 sudo systemctl enable --now snapd.socket
